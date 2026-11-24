@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: golovinengineer/canopen-dictator@dev # @v0.2.0 once it is released
+      - uses: golovinengineer/canopen-dictator@v0.2.0
         with:
           version: ${{ github.event.client_payload.version }}
       - run: dictator check device.objdict.toml --strict
@@ -36,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: golovinengineer/canopen-dictator@dev # @v0.2.0 once it is released
+      - uses: golovinengineer/canopen-dictator@v0.2.0
         with:
           version: ${{ github.event.client_payload.version }}
       - name: dictator check rejects broken/device.objdict.toml
