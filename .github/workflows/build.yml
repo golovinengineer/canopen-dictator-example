@@ -1,0 +1,49 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+  repository_dispatch:
+    types: [dictator-release]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: golovinengineer/canopen-dictator@dev # @v0.2.0 once it is released
+        with:
+          version: ${{ github.event.client_payload.version }}
+      - run: dictator check device.objdict.toml --strict
+      - run: cmake -S . -B build
+      - run: cmake --build build
+      - run: cmake --build build --target od_docs
+      - uses: actions/upload-artifact@v7
+        with:
+          name: object-dictionary
+          path: |
+            build/device.eds
+            build/device.md
+
+  check-fails:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: golovinengineer/canopen-dictator@dev # @v0.2.0 once it is released
+        with:
+          version: ${{ github.event.client_payload.version }}
+      - name: dictator check rejects broken/device.objdict.toml
+        run: |
+          if dictator check broken/device.objdict.toml --strict 2> "$RUNNER_TEMP/err"; then
+            echo "::error::dictator check accepted a broken project"
+            exit 1
+          fi
+          cat "$RUNNER_TEMP/err"
+          grep -q 'does not fit UNSIGNED8' "$RUNNER_TEMP/err"

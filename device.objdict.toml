@@ -1,0 +1,597 @@
+format = 1
+
+[device]
+vendor_name = ""
+vendor_id = ""
+product_name = "ExampleDevice"
+product_id = ""
+description = ""
+file_version = "1"
+created_by = ""
+created = "2026-11-24T14:04:40"
+baud_rates = [1000]
+granularity = 8
+rpdo_count = 4
+tpdo_count = 4
+
+[canfestival]
+node_name = "ExampleDevice"
+node_id = 0
+node_type = "slave"
+default_string_size = 10
+
+[object.0x1000]
+name = "Device Type"
+kind = "var"
+type = "u32"
+access = "ro"
+default = "0x00000000"
+
+[object.0x1001]
+name = "Error Register"
+kind = "var"
+type = "u8"
+access = "ro"
+pdo = "optional"
+default = "0x00"
+
+[object.0x1003]
+name = "Pre-defined Error Field"
+kind = "array"
+sub = [
+  { sub = 0x00, name = "Number of Errors", type = "u8", access = "rw", default = "0x08" },
+  { sub = 0x01, name = "Standard Error Field", type = "u32", access = "ro", default = "0x00000000" },
+  { sub = 0x02, name = "Standard Error Field", type = "u32", access = "ro", default = "0x00000000" },
+  { sub = 0x03, name = "Standard Error Field", type = "u32", access = "ro", default = "0x00000000" },
+  { sub = 0x04, name = "Standard Error Field", type = "u32", access = "ro", default = "0x00000000" },
+  { sub = 0x05, name = "Standard Error Field", type = "u32", access = "ro", default = "0x00000000" },
+  { sub = 0x06, name = "Standard Error Field", type = "u32", access = "ro", default = "0x00000000" },
+  { sub = 0x07, name = "Standard Error Field", type = "u32", access = "ro", default = "0x00000000" },
+  { sub = 0x08, name = "Standard Error Field", type = "u32", access = "ro", default = "0x00000000" },
+]
+
+[object.0x1005]
+name = "SYNC COB ID"
+kind = "var"
+type = "u32"
+access = "rw"
+default = "0x00000080"
+
+[object.0x1006]
+name = "Communication / Cycle Period"
+kind = "var"
+type = "u32"
+access = "rw"
+default = "0x00000000"
+
+[object.0x1007]
+name = "Synchronous Window Length"
+kind = "var"
+type = "u32"
+access = "rw"
+default = "0x00000000"
+
+[object.0x1008]
+name = "Manufacturer Device Name"
+kind = "var"
+type = "string"
+access = "const"
+default = "Example Device"
+
+[object.0x1009]
+name = "Manufacturer Hardware Version"
+kind = "var"
+type = "string"
+access = "const"
+default = "1.0"
+
+[object.0x100A]
+name = "Manufacturer Software Version"
+kind = "var"
+type = "string"
+access = "const"
+default = "0.1.0"
+
+[object.0x1010]
+name = "Store parameters"
+kind = "record"
+sub = [
+  { sub = 0x00, name = "Number of Entries", type = "u8", access = "ro", default = "0x03" },
+  { sub = 0x01, name = "Save All Parameters", type = "u32", access = "rw", default = "0x00000001" },
+  { sub = 0x02, name = "Save Communication Parameters", type = "u32", access = "rw", default = "0x00000001" },
+  { sub = 0x03, name = "Save Application Parameters", type = "u32", access = "rw", default = "0x00000001" },
+]
+
+[object.0x1011]
+name = "Restore Default Parameters"
+kind = "record"
+sub = [
+  { sub = 0x00, name = "Number of Entries", type = "u8", access = "ro", default = "0x03" },
+  { sub = 0x01, name = "Restore All Default Parameters", type = "u32", access = "rw", default = "0x00000001" },
+  { sub = 0x02, name = "Restore Communication Default Parameters", type = "u32", access = "rw", default = "0x00000001" },
+  { sub = 0x03, name = "Restore Application Default Parameters", type = "u32", access = "rw", default = "0x00000001" },
+]
+
+[object.0x1012]
+name = "TIME COB ID"
+kind = "var"
+type = "u32"
+access = "rw"
+default = "0x00000100"
+
+[object.0x1014]
+name = "Emergency COB ID"
+kind = "var"
+type = "u32"
+access = "rw"
+default = "$NODEID+0x80"
+
+[object.0x1015]
+name = "Inhibit Time Emergency"
+kind = "var"
+type = "u16"
+access = "rw"
+default = "0x0000"
+
+[object.0x1016]
+name = "Consumer Heartbeat Time"
+kind = "array"
+sub = [
+  { sub = 0x00, name = "Number of Entries", type = "u8", access = "ro", default = "0x04" },
+  { sub = 0x01, name = "Consumer Heartbeat Time", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x02, name = "Consumer Heartbeat Time", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x03, name = "Consumer Heartbeat Time", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x04, name = "Consumer Heartbeat Time", type = "u32", access = "rw", default = "0x00000000" },
+]
+
+[object.0x1017]
+name = "Producer Heartbeat Time"
+kind = "var"
+type = "u16"
+access = "rw"
+default = "0x03E8"
+
+[object.0x1018]
+name = "Identity"
+kind = "record"
+sub = [
+  { sub = 0x00, name = "Number of Entries", type = "u8", access = "ro", default = "0x04" },
+  { sub = 0x01, name = "Vendor ID", type = "u32", access = "ro", default = "0x00000000" },
+  { sub = 0x02, name = "Product Code", type = "u32", access = "ro", default = "0x00000001" },
+  { sub = 0x03, name = "Revision Number", type = "u32", access = "ro", default = "0x00010000" },
+  { sub = 0x04, name = "Serial Number", type = "u32", access = "ro", default = "0x00000000" },
+]
+
+[object.0x1019]
+name = "Synchronous counter overflow value"
+kind = "var"
+type = "u8"
+access = "rw"
+default = "0x00"
+
+[object.0x1200]
+name = "Server SDO Parameter"
+kind = "record"
+sub = [
+  { sub = 0x00, name = "Number of Entries", type = "u8", access = "ro", default = "0x02" },
+  { sub = 0x01, name = "COB ID Client to Server (Receive SDO)", type = "u32", access = "ro", default = "$NODEID+0x600" },
+  { sub = 0x02, name = "COB ID Server to Client (Transmit SDO)", type = "u32", access = "ro", default = "$NODEID+0x580" },
+]
+
+[object.0x1280]
+name = "Client SDO 1 Parameter"
+kind = "record"
+sub = [
+  { sub = 0x00, name = "Number of Entries", type = "u8", access = "ro", default = "0x03" },
+  { sub = 0x01, name = "COB ID Client to Server (Transmit SDO)", type = "u32", access = "rw", default = "0x80000000" },
+  { sub = 0x02, name = "COB ID Server to Client (Receive SDO)", type = "u32", access = "rw", default = "0x80000000" },
+  { sub = 0x03, name = "Node ID of the SDO Server", type = "u8", access = "rw", default = "0x01" },
+]
+
+[object.0x1400]
+name = "Receive PDO 1 Parameter"
+kind = "record"
+sub = [
+  { sub = 0x00, name = "Highest SubIndex Supported", type = "u8", access = "ro", default = "0x05" },
+  { sub = 0x01, name = "COB ID used by PDO", type = "u32", access = "rw", default = "$NODEID+0x200" },
+  { sub = 0x02, name = "Transmission Type", type = "u8", access = "rw", default = "0xFE" },
+  { sub = 0x03, name = "Inhibit Time", type = "u16", access = "rw", default = "0x0000" },
+  { sub = 0x04, name = "Compatibility Entry", type = "u8", access = "rw", default = "0x00" },
+  { sub = 0x05, name = "Event Timer", type = "u16", access = "rw", default = "0x0000" },
+]
+
+[object.0x1401]
+name = "Receive PDO 2 Parameter"
+kind = "record"
+sub = [
+  { sub = 0x00, name = "Highest SubIndex Supported", type = "u8", access = "ro", default = "0x05" },
+  { sub = 0x01, name = "COB ID used by PDO", type = "u32", access = "rw", default = "$NODEID+0x300" },
+  { sub = 0x02, name = "Transmission Type", type = "u8", access = "rw", default = "0xFE" },
+  { sub = 0x03, name = "Inhibit Time", type = "u16", access = "rw", default = "0x0000" },
+  { sub = 0x04, name = "Compatibility Entry", type = "u8", access = "rw", default = "0x00" },
+  { sub = 0x05, name = "Event Timer", type = "u16", access = "rw", default = "0x0000" },
+]
+
+[object.0x1402]
+name = "Receive PDO 3 Parameter"
+kind = "record"
+sub = [
+  { sub = 0x00, name = "Highest SubIndex Supported", type = "u8", access = "ro", default = "0x05" },
+  { sub = 0x01, name = "COB ID used by PDO", type = "u32", access = "rw", default = "$NODEID+0x80000400" },
+  { sub = 0x02, name = "Transmission Type", type = "u8", access = "rw", default = "0xFE" },
+  { sub = 0x03, name = "Inhibit Time", type = "u16", access = "rw", default = "0x0000" },
+  { sub = 0x04, name = "Compatibility Entry", type = "u8", access = "rw", default = "0x00" },
+  { sub = 0x05, name = "Event Timer", type = "u16", access = "rw", default = "0x0000" },
+]
+
+[object.0x1403]
+name = "Receive PDO 4 Parameter"
+kind = "record"
+sub = [
+  { sub = 0x00, name = "Highest SubIndex Supported", type = "u8", access = "ro", default = "0x05" },
+  { sub = 0x01, name = "COB ID used by PDO", type = "u32", access = "rw", default = "$NODEID+0x80000500" },
+  { sub = 0x02, name = "Transmission Type", type = "u8", access = "rw", default = "0xFE" },
+  { sub = 0x03, name = "Inhibit Time", type = "u16", access = "rw", default = "0x0000" },
+  { sub = 0x04, name = "Compatibility Entry", type = "u8", access = "rw", default = "0x00" },
+  { sub = 0x05, name = "Event Timer", type = "u16", access = "rw", default = "0x0000" },
+]
+
+[object.0x1600]
+name = "Receive PDO 1 Mapping"
+kind = "array"
+sub = [
+  { sub = 0x00, name = "Number of Entries", type = "u8", access = "rw", default = "0x08" },
+  { sub = 0x01, name = "PDO 1 Mapping for an application object 1", type = "u32", access = "rw", default = "0x62000108" },
+  { sub = 0x02, name = "PDO 1 Mapping for an application object 2", type = "u32", access = "rw", default = "0x62000208" },
+  { sub = 0x03, name = "PDO 1 Mapping for an application object 3", type = "u32", access = "rw", default = "0x20060010" },
+  { sub = 0x04, name = "PDO 1 Mapping for an application object 4", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x05, name = "PDO 1 Mapping for an application object 5", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x06, name = "PDO 1 Mapping for an application object 6", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x07, name = "PDO 1 Mapping for an application object 7", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x08, name = "PDO 1 Mapping for an application object 8", type = "u32", access = "rw", default = "0x00000000" },
+]
+
+[object.0x1601]
+name = "Receive PDO 2 Mapping"
+kind = "array"
+sub = [
+  { sub = 0x00, name = "Number of Entries", type = "u8", access = "rw", default = "0x08" },
+  { sub = 0x01, name = "PDO 2 Mapping for an application object 1", type = "u32", access = "rw", default = "0x20020010" },
+  { sub = 0x02, name = "PDO 2 Mapping for an application object 2", type = "u32", access = "rw", default = "0x00050008" },
+  { sub = 0x03, name = "PDO 2 Mapping for an application object 3", type = "u32", access = "rw", default = "0x21010220" },
+  { sub = 0x04, name = "PDO 2 Mapping for an application object 4", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x05, name = "PDO 2 Mapping for an application object 5", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x06, name = "PDO 2 Mapping for an application object 6", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x07, name = "PDO 2 Mapping for an application object 7", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x08, name = "PDO 2 Mapping for an application object 8", type = "u32", access = "rw", default = "0x00000000" },
+]
+
+[object.0x1602]
+name = "Receive PDO 3 Mapping"
+kind = "array"
+sub = [
+  { sub = 0x00, name = "Number of Entries", type = "u8", access = "rw", default = "0x08" },
+  { sub = 0x01, name = "PDO 3 Mapping for an application object 1", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x02, name = "PDO 3 Mapping for an application object 2", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x03, name = "PDO 3 Mapping for an application object 3", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x04, name = "PDO 3 Mapping for an application object 4", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x05, name = "PDO 3 Mapping for an application object 5", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x06, name = "PDO 3 Mapping for an application object 6", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x07, name = "PDO 3 Mapping for an application object 7", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x08, name = "PDO 3 Mapping for an application object 8", type = "u32", access = "rw", default = "0x00000000" },
+]
+
+[object.0x1603]
+name = "Receive PDO 4 Mapping"
+kind = "array"
+sub = [
+  { sub = 0x00, name = "Number of Entries", type = "u8", access = "rw", default = "0x08" },
+  { sub = 0x01, name = "PDO 4 Mapping for an application object 1", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x02, name = "PDO 4 Mapping for an application object 2", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x03, name = "PDO 4 Mapping for an application object 3", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x04, name = "PDO 4 Mapping for an application object 4", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x05, name = "PDO 4 Mapping for an application object 5", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x06, name = "PDO 4 Mapping for an application object 6", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x07, name = "PDO 4 Mapping for an application object 7", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x08, name = "PDO 4 Mapping for an application object 8", type = "u32", access = "rw", default = "0x00000000" },
+]
+
+[object.0x1800]
+name = "Transmit PDO 1 Parameter"
+kind = "record"
+sub = [
+  { sub = 0x00, name = "Highest SubIndex Supported", type = "u8", access = "ro", default = "0x06" },
+  { sub = 0x01, name = "COB ID used by PDO", type = "u32", access = "rw", default = "$NODEID+0x180" },
+  { sub = 0x02, name = "Transmission Type", type = "u8", access = "rw", default = "0xFE" },
+  { sub = 0x03, name = "Inhibit Time", type = "u16", access = "rw", default = "0x0000" },
+  { sub = 0x04, name = "Compatibility Entry", type = "u8", access = "rw", default = "0x00" },
+  { sub = 0x05, name = "Event Timer", type = "u16", access = "rw", default = "0x0064" },
+  { sub = 0x06, name = "SYNC start value", type = "u8", access = "rw", default = "0x00" },
+]
+
+[object.0x1801]
+name = "Transmit PDO 2 Parameter"
+kind = "record"
+sub = [
+  { sub = 0x00, name = "Highest SubIndex Supported", type = "u8", access = "ro", default = "0x06" },
+  { sub = 0x01, name = "COB ID used by PDO", type = "u32", access = "rw", default = "$NODEID+0x280" },
+  { sub = 0x02, name = "Transmission Type", type = "u8", access = "rw", default = "0xFE" },
+  { sub = 0x03, name = "Inhibit Time", type = "u16", access = "rw", default = "0x0000" },
+  { sub = 0x04, name = "Compatibility Entry", type = "u8", access = "rw", default = "0x00" },
+  { sub = 0x05, name = "Event Timer", type = "u16", access = "rw", default = "0x0000" },
+  { sub = 0x06, name = "SYNC start value", type = "u8", access = "rw", default = "0x00" },
+]
+
+[object.0x1802]
+name = "Transmit PDO 3 Parameter"
+kind = "record"
+sub = [
+  { sub = 0x00, name = "Highest SubIndex Supported", type = "u8", access = "ro", default = "0x06" },
+  { sub = 0x01, name = "COB ID used by PDO", type = "u32", access = "rw", default = "$NODEID+0x80000380" },
+  { sub = 0x02, name = "Transmission Type", type = "u8", access = "rw", default = "0xFE" },
+  { sub = 0x03, name = "Inhibit Time", type = "u16", access = "rw", default = "0x0000" },
+  { sub = 0x04, name = "Compatibility Entry", type = "u8", access = "rw", default = "0x00" },
+  { sub = 0x05, name = "Event Timer", type = "u16", access = "rw", default = "0x0000" },
+  { sub = 0x06, name = "SYNC start value", type = "u8", access = "rw", default = "0x00" },
+]
+
+[object.0x1803]
+name = "Transmit PDO 4 Parameter"
+kind = "record"
+sub = [
+  { sub = 0x00, name = "Highest SubIndex Supported", type = "u8", access = "ro", default = "0x06" },
+  { sub = 0x01, name = "COB ID used by PDO", type = "u32", access = "rw", default = "$NODEID+0x80000480" },
+  { sub = 0x02, name = "Transmission Type", type = "u8", access = "rw", default = "0xFE" },
+  { sub = 0x03, name = "Inhibit Time", type = "u16", access = "rw", default = "0x0000" },
+  { sub = 0x04, name = "Compatibility Entry", type = "u8", access = "rw", default = "0x00" },
+  { sub = 0x05, name = "Event Timer", type = "u16", access = "rw", default = "0x0000" },
+  { sub = 0x06, name = "SYNC start value", type = "u8", access = "rw", default = "0x00" },
+]
+
+[object.0x1A00]
+name = "Transmit PDO 1 Mapping"
+kind = "array"
+sub = [
+  { sub = 0x00, name = "Number of Entries", type = "u8", access = "rw", default = "0x08" },
+  { sub = 0x01, name = "PDO 1 Mapping for a process data variable 1", type = "u32", access = "rw", default = "0x60000108" },
+  { sub = 0x02, name = "PDO 1 Mapping for a process data variable 2", type = "u32", access = "rw", default = "0x60000208" },
+  { sub = 0x03, name = "PDO 1 Mapping for a process data variable 3", type = "u32", access = "rw", default = "0x20050008" },
+  { sub = 0x04, name = "PDO 1 Mapping for a process data variable 4", type = "u32", access = "rw", default = "0x20070020" },
+  { sub = 0x05, name = "PDO 1 Mapping for a process data variable 5", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x06, name = "PDO 1 Mapping for a process data variable 6", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x07, name = "PDO 1 Mapping for a process data variable 7", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x08, name = "PDO 1 Mapping for a process data variable 8", type = "u32", access = "rw", default = "0x00000000" },
+]
+
+[object.0x1A01]
+name = "Transmit PDO 2 Mapping"
+kind = "array"
+sub = [
+  { sub = 0x00, name = "Number of Entries", type = "u8", access = "rw", default = "0x08" },
+  { sub = 0x01, name = "PDO 2 Mapping for a process data variable 1", type = "u32", access = "rw", default = "0x21010108" },
+  { sub = 0x02, name = "PDO 2 Mapping for a process data variable 2", type = "u32", access = "rw", default = "0x21010220" },
+  { sub = 0x03, name = "PDO 2 Mapping for a process data variable 3", type = "u32", access = "rw", default = "0x21000110" },
+  { sub = 0x04, name = "PDO 2 Mapping for a process data variable 4", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x05, name = "PDO 2 Mapping for a process data variable 5", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x06, name = "PDO 2 Mapping for a process data variable 6", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x07, name = "PDO 2 Mapping for a process data variable 7", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x08, name = "PDO 2 Mapping for a process data variable 8", type = "u32", access = "rw", default = "0x00000000" },
+]
+
+[object.0x1A02]
+name = "Transmit PDO 3 Mapping"
+kind = "array"
+sub = [
+  { sub = 0x00, name = "Number of Entries", type = "u8", access = "rw", default = "0x08" },
+  { sub = 0x01, name = "PDO 3 Mapping for a process data variable 1", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x02, name = "PDO 3 Mapping for a process data variable 2", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x03, name = "PDO 3 Mapping for a process data variable 3", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x04, name = "PDO 3 Mapping for a process data variable 4", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x05, name = "PDO 3 Mapping for a process data variable 5", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x06, name = "PDO 3 Mapping for a process data variable 6", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x07, name = "PDO 3 Mapping for a process data variable 7", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x08, name = "PDO 3 Mapping for a process data variable 8", type = "u32", access = "rw", default = "0x00000000" },
+]
+
+[object.0x1A03]
+name = "Transmit PDO 4 Mapping"
+kind = "array"
+sub = [
+  { sub = 0x00, name = "Number of Entries", type = "u8", access = "rw", default = "0x08" },
+  { sub = 0x01, name = "PDO 4 Mapping for a process data variable 1", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x02, name = "PDO 4 Mapping for a process data variable 2", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x03, name = "PDO 4 Mapping for a process data variable 3", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x04, name = "PDO 4 Mapping for a process data variable 4", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x05, name = "PDO 4 Mapping for a process data variable 5", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x06, name = "PDO 4 Mapping for a process data variable 6", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x07, name = "PDO 4 Mapping for a process data variable 7", type = "u32", access = "rw", default = "0x00000000" },
+  { sub = 0x08, name = "PDO 4 Mapping for a process data variable 8", type = "u32", access = "rw", default = "0x00000000" },
+]
+
+[object.0x2000]
+name = "Demo boolean"
+kind = "var"
+callback = true
+type = "bool"
+access = "rw"
+pdo = "optional"
+default = "0"
+
+[object.0x2001]
+name = "Demo integer8"
+kind = "var"
+type = "i8"
+access = "rw"
+pdo = "optional"
+default = "-5"
+
+[object.0x2002]
+name = "Demo integer16"
+kind = "var"
+type = "i16"
+access = "rw"
+pdo = "optional"
+default = "-300"
+
+[object.0x2003]
+name = "Demo integer32"
+kind = "var"
+type = "i32"
+access = "rw"
+pdo = "optional"
+default = "-100000"
+
+[object.0x2004]
+name = "Demo integer64"
+kind = "var"
+type = "i64"
+access = "rw"
+default = "-1"
+
+[object.0x2005]
+name = "Demo unsigned8"
+kind = "var"
+type = "u8"
+access = "ro"
+pdo = "optional"
+default = "0x2A"
+
+[object.0x2006]
+name = "Demo unsigned16"
+kind = "var"
+callback = true
+type = "u16"
+access = "rw"
+pdo = "optional"
+default = "0x03E8"
+
+[object.0x2007]
+name = "Demo unsigned32"
+kind = "var"
+type = "u32"
+access = "rw"
+pdo = "optional"
+default = "0x12345678"
+
+[object.0x2008]
+name = "Demo unsigned64"
+kind = "var"
+type = "u64"
+access = "rw"
+default = "0x0123456789ABCDEF"
+
+[object.0x2009]
+name = "Demo real32"
+kind = "var"
+type = "f32"
+access = "rw"
+default = "1.5"
+
+[object.0x200A]
+name = "Demo real64"
+kind = "var"
+type = "f64"
+access = "rw"
+default = "-2.25"
+
+[object.0x200B]
+name = "Demo visible string"
+kind = "var"
+type = "string"
+access = "rw"
+default = "hello"
+
+[object.0x200C]
+name = "Demo octet string"
+kind = "var"
+type = "octets"
+access = "rw"
+default = "01 02 03 04"
+
+[object.0x200F]
+name = "Demo constant"
+kind = "var"
+type = "u16"
+access = "const"
+default = "0x0102"
+
+[object.0x2010]
+name = "Demo write only"
+kind = "var"
+type = "u32"
+access = "wo"
+default = "0x00000000"
+
+[object.0x2011]
+name = "Demo node-id formula"
+kind = "var"
+type = "u32"
+access = "ro"
+default = "$NODEID+0x100"
+
+[object.0x2012]
+name = "Demo persistent value"
+kind = "var"
+type = "u32"
+access = "rw"
+default = "0x00000007"
+save = true
+
+[object.0x2100]
+name = "Demo array"
+kind = "record"
+sub = [
+  { sub = 0x00, name = "Number of Entries", type = "u8", access = "ro", default = "0x08" },
+  { sub = 0x01, name = "Demo array 1", type = "i16", access = "rw", pdo = "optional", default = "0" },
+  { sub = 0x02, name = "Demo array 2", type = "i16", access = "rw", pdo = "optional", default = "100" },
+  { sub = 0x03, name = "Demo array 3", type = "i16", access = "rw", pdo = "optional", default = "-100" },
+  { sub = 0x04, name = "Demo array 4", type = "i16", access = "rw", pdo = "optional", default = "32767" },
+  { sub = 0x05, name = "Demo array 5", type = "i16", access = "rw", pdo = "optional", default = "-32768" },
+  { sub = 0x06, name = "Demo array 6", type = "i16", access = "rw", pdo = "optional", default = "1" },
+  { sub = 0x07, name = "Demo array 7", type = "i16", access = "rw", pdo = "optional", default = "2" },
+  { sub = 0x08, name = "Demo array 8", type = "i16", access = "rw", pdo = "optional", default = "3" },
+]
+
+[object.0x2101]
+name = "Demo record"
+kind = "record"
+callback = true
+sub = [
+  { sub = 0x00, name = "Number of Entries", type = "u8", access = "ro", default = "0x06" },
+  { sub = 0x01, name = "Status", type = "u8", access = "ro", pdo = "optional", default = "0x00" },
+  { sub = 0x02, name = "Position", type = "i32", access = "rw", pdo = "optional", default = "0" },
+  { sub = 0x03, name = "Gain", type = "f32", access = "rw", default = "0.5" },
+  { sub = 0x04, name = "Compatibility Entry", type = "u8", access = "rw", default = "0x00" },
+  { sub = 0x05, name = "Enable", type = "bool", access = "rw", default = "1" },
+  { sub = 0x06, name = "Label", type = "string", access = "rw", default = "axis" },
+]
+
+[object.0x2102]
+name = "Demo parameters"
+kind = "record"
+callback = true
+sub = [
+  { sub = 0x00, name = "Number of Entries", type = "u8", access = "ro", default = "0x03" },
+  { sub = 0x01, name = "Ratio", type = "f32", access = "rw", default = "0.75", save = true },
+  { sub = 0x02, name = "Timeout", type = "u16", access = "rw", default = "0x01F4", save = true },
+  { sub = 0x03, name = "Mode", type = "u8", access = "rw", default = "0x02", save = true },
+]
+
+[object.0x6000]
+name = "Read input 8-bit"
+kind = "record"
+sub = [
+  { sub = 0x00, name = "Number of Entries", type = "u8", access = "ro", default = "0x02" },
+  { sub = 0x01, name = "Input 1", type = "u8", access = "ro", pdo = "optional", default = "0x00" },
+  { sub = 0x02, name = "Input 2", type = "u8", access = "ro", pdo = "optional", default = "0x00" },
+]
+
+[object.0x6200]
+name = "Write output 8-bit"
+kind = "record"
+callback = true
+sub = [
+  { sub = 0x00, name = "Number of Entries", type = "u8", access = "ro", default = "0x02" },
+  { sub = 0x01, name = "Output 1", type = "u8", access = "rw", pdo = "optional", default = "0x00" },
+  { sub = 0x02, name = "Output 2", type = "u8", access = "rw", pdo = "optional", default = "0x00" },
+]
